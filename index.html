@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas Urgentes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: White ; /* Fondo gris claro */
+            color: #333; /* Texto gris oscuro */
+        }
+        header {
+            background-color: #3e8d9e       ; /* Fondo azul oscuro */
+            padding: 20px;
+            text-align: center;
+            color: White; /* Texto gris claro */
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #34495e; /* Fondo azul grisáceo */
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        nav a {
+            color: #ecf0f1; /* Texto gris claro */
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        nav a:hover {
+            background-color: #2980b9; /* Fondo azul más claro al pasar el ratón */
+            transform: scale(1.1);
+            color: #fff; /* Texto blanco al pasar el ratón */
+        }
+        .hero {
+            background-color: #e3e3e3    ; /* Fondo gris */
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #2c3e50; /* Texto azul oscuro */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            font-size: 2.5em;
+            position: relative;
+            font-family: 'Roboto', sans-serif;
+        }
+        .hero h2 {
+            z-index: 1;
+        }
+        .content {
+            padding: 40px 20px;
+            background-color: #ecf0f1; /* Fondo gris claro */
+            margin: 20px;
+            border-radius: 15px;
+            border: 2px solid #2c3e50; /* Borde azul oscuro */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .content h2 {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #2c3e50; /* Texto azul oscuro */
+        }
+        .content p {
+            text-align: center;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #333; /* Texto gris oscuro */
+        }
+        .tasks, .exams, .subjects {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+        .item {
+            background-color: #fff; /* Fondo blanco */
+            border: 1px solid #bdc3c7; /* Borde gris claro */
+            margin: 15px;
+            padding: 15px;
+            width: calc(25% - 30px);
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #333; /* Texto gris oscuro */
+        }
+        .item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .item img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 4px solid #2c3e50; /* Borde azul oscuro */
+        }
+        .item h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #2980b9; /* Texto azul */
+        }
+        .item p {
+            font-size: 1.1em;
+            color: #333; /* Texto gris oscuro */
+        }
+        .footer {
+            background-color: #34495e; /* Fondo azul grisáceo */
+            color: #ecf0f1; /* Texto gris claro */
+            text-align: center;
+            padding: 30px;
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+        .footer p {
+            margin: 0;
+        }
+        .contact-info {
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .contact-info h3 {
+            margin-bottom: 10px;
+            color: #2980b9; /* Texto azul */
+        }
+        .contact-info a {
+            color: #ecf0f1; /* Enlaces gris claro */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-info a:hover {
+            color: #2980b9; /* Enlaces azules al pasar el ratón */
+        }
+
+        /* Media Queries para diseño responsivo */
+        @media (max-width: 1200px) {
+            .item {
+                width: calc(33.33% - 30px);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .item {
+                width: calc(50% - 30px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            .item {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .item {
+                width: calc(100% - 30px);
+            }
+            .content {
+                margin: 10px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tareas Urgentes</h1>
+    </header>
+    <nav>
+        <a href="#home">Inicio</a>
+        <a href="#about">Sobre Nosotros</a>
+        <a href="#tasks">Tareas</a>
+        <a href="#exams">Exámenes</a>
+        <a href="#subjects">Materias</a>
+        <a href="#contact">Contacto</a>
+    </nav>
+    <div class="hero">
+        <h2>Asegura tu calificación y entrega</h2>
+    </div>
+    <div class="content" id="home">
+        <h2>Inicio</h2>
+        <p>En Tareas Urgentes, te ayudamos a alcanzar tus metas académicas con servicios personalizados para cada necesidad.</p>
+    </div>
+    <div class="content" id="about">
+        <h2>Sobre Nosotros</h2>
+        <p>Tareas Urgentes nació para apoyar a estudiantes de preparatoria y universidad a cumplir con sus responsabilidades académicas. Nuestro equipo está compuesto por expertos en diversas materias, listos para asistirte en cada paso del camino.</p>
+    </div>
+
+    <!-- Sección de Tareas -->
+    <div class="content" id="tasks">
+        <h2>Tareas</h2>
+        <div class="tasks">
+            <div class="item">
+                <img src="Tesis.jpg" alt="Tesis">
+                <h3>Tesis</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Tesina.jpg" alt="Tesina">
+                <h3>Tesina</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Infografia.jpg" alt="Infografía">
+                <h3>Infografía</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Proyectos.jpg" alt="Proyectos">
+                <h3>Proyectos</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Exposiciones.jpg" alt="Exposiciones">
+                <h3>Exposiciones</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Reportes.jpg" alt="Reportes">
+                <h3>Reportes</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Guias.jpg" alt="Guías">
+                <h3>Guías</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Practicas.jpg" alt="Prácticas">
+                <h3>Prácticas</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Correcciones.jpg" alt="Correcciones">
+                <h3>Correcciones</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Mapas.jpg" alt="Mapas">
+                <h3>Mapas</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Investigaciones.jpg" alt="Investigaciones">
+                <h3>Investigaciones</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Historieta.jpg" alt="Historieta">
+                <h3>Historieta</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Problemario.jpg" alt="Problemario">
+                <h3>Problemario</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Ejercicios.jpg" alt="Ejercicios">
+                <h3>Ejercicios</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Sintesis.jpg" alt="Síntesis">
+                <h3>Síntesis</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="ResumenLibro.jpg" alt="Resumen de Libro">
+                <h3>Resumen de Libro</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Planeacion.jpg" alt="Planeación">
+                <h3>Planeación</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="CuadrosComparativos.jpg" alt="Cuadros Comparativos">
+                <h3>Cuadros Comparativos</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Amortizacion.jpg" alt="Amortización">
+                <h3>Amortización</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="EstadosResultados.jpg" alt="Estados de Resultados">
+                <h3>Estados de Resultados</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Varianza.jpg" alt="Varianza">
+                <h3>Varianza</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Render.jpg" alt="Render">
+                <h3>Render</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Planos.jpg" alt="Planos">
+                <h3>Planos</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Diseño3D.jpg" alt="Diseño 3D">
+                <h3>Diseño 3D</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Programacion.jpg" alt="Programación">
+                <h3>Programación</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="PaginasWeb.jpg" alt="Páginas Web">
+                <h3>Páginas Web</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Triptico.jpg" alt="Tríptico">
+                <h3>Tríptico</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="SolidWork.jpg" alt="SolidWorks">
+                <h3>SolidWorks</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="Ensayos.jpg" alt="Ensayos">
+                <h3>Ensayos</h3>
+                <p>Precio a consultar</p>
+            </div>
+            <div class="item">
+                <img src="EdicionVideo.jpg" alt="Edición de Video">
+                <h3>Edición de Video</h3>
+                <p>Precio a consultar</p>
+            </div>
+        </div>
+    </div>
+
+ <div class="content" id="subjects">
+        <h2>Tareas y Exámenes</h2>
+                <ul class="task-list">
+
+            <li>Álgebra</li>
+            <li>Historia</li>
+            <li>Química</li>
+            <li>Física</li>
+            <li>Cálculo Diferencial</li>
+            <li>Cálculo Integral</li>
+            <li>Trigonometría</li>
+            <li>Matemáticas Generales</li>
+            <li>Geometría Analítica</li>
+            <li>Estadística y Probabilidad</li>
+            <li>Medicina General</li>
+            <li>Pedagogía</li>
+            <li>Contabilidad y Finanzas</li>
+            <li>Economía</li>
+            <li>Ingeniería Industrial</li>
+            <li>Derecho</li>
+            <li>Materias de Tronco Común</li>
+            <li>Metalúrgica</li>
+            <li>Administración</li>
+            <li>Automotriz</li>
+            <li>Ingeniería Civil</li>
+            <li>Arquitectura</li>
+            <li>Electricidad</li>
+            <li>Programación</li>
+            <li>Odontología</li>
+            <li>Psicología</li>
+            <li>Ciencias Sociales y Administrativas</li>
+            <li>Aeronáutica</li>
+            <li>Mecatrónica</li>
+            <li>Nutriología</li>
+            <li>Turismo</li>
+            <li>Humanidades y Artes</li>
+        </ul>
+    </div>
+
+    <div class="content" id="contact">
+        <h2>Atencion</h2>
+        <div class="contact-info">
+            <p>Horarios: Los 365 días las 24 Hrs.</p>
+            <p>Precios: A partir de $50</p>
+            <p>Correo electronico: tareasurgentesinfo@gmail.com</p>
+            <h2><p>Atención inmediata desde:</h2></p>
+            <h1><p>WhatsApp +52 5539448685</h1><p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Tareas Urgentes. Todos los derechos reservados.</p>
+    </div>
+</body>
+</html>
